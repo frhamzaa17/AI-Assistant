@@ -4,17 +4,25 @@ from vector import retriever
 import requests
 import wikipedia
 import re
-
-# Compatibility for older Python versions (<3.10)
+import csv
+import os
+#for older Python versions 
 from typing import Optional
-
-# model Initialization
 model = OllamaLLM(model="llama3.2")
 
-# In-memory history
+#history
 conversation_history = []
 
-# Detect small query
+# conversation history
+def log_to_csv(user_msg, assistant_msg, filename="conversation_log.csv"):
+    file_exists = os.path.isfile(filename)
+    with open(filename, mode='a', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file)
+        if not file_exists:
+            writer.writerow(["User", "Assistant"])
+        writer.writerow([user_msg, assistant_msg])
+
+# Detect small query like greetings and complements
 def detect_smalltalk(question: str) -> Optional[str]:
     q = question.lower().strip()
     if len(q.split()) > 6:
@@ -56,19 +64,19 @@ def detect_smalltalk(question: str) -> Optional[str]:
         return "Yes, I can help with that! 😊 Just give me more details."
     return None
 
-# Detect follow-up source requests
+# follow-up queries
 def is_followup_for_sources(question: str) -> bool:
     return any(kw in question.lower() for kw in ["source", "reference", "where", "give link", "proof"])
 
-# Detect casual questions
+# for casual queries
 def is_casual_question(question: str) -> bool:
     casual_keywords = [
-        "how are you", "hi", "hello", "good morning", "good night", "what can you do", "who are you", 
+        "how are you", "hi", "hello", "good morning", "good night", "what can you do", "who are you",
         "you're good", "nice", "can you", "good job", "well done", "hey"
     ]
     return any(kw in question.lower() for kw in casual_keywords)
 
-# SerpAPI
+# APIs
 def fetch_web_data(query):
     API_KEY = "81338aaaaf9975be0987ad03e12ff0dbc4761706bd80bf08f3788e12cf1487a9"  # Replace with your SerpAPI key
     url = "https://serpapi.com/search"
@@ -106,7 +114,7 @@ def extract_location_from_question(q: str):
     match = re.search(r"in (\w+(?: \w+)*)", q.lower())
     return match.group(1) if match else None
 
-# Auto-detect location by IP
+# ip detection for location
 def get_user_location():
     try:
         ip_data = requests.get("http://ip-api.com/json/").json()
@@ -161,6 +169,7 @@ def answer_question(question: str) -> str:
     if smalltalk_response:
         conversation_history.append({"role": "user", "content": question})
         conversation_history.append({"role": "assistant", "content": smalltalk_response})
+        log_to_csv(question, smalltalk_response)
         return smalltalk_response
 
     if is_followup_for_sources(question) and conversation_history:
@@ -169,13 +178,17 @@ def answer_question(question: str) -> str:
                 question = past["content"]
                 break
 
-    # Weather detection
+    # Weather check
     if "weather" in question.lower():
         location = extract_location_from_question(question) or get_user_location()
         if not location:
-            return "Couldn't detect your location. Please mention Location'."
+            return "Couldn't detect your location. Please mention the location."
         web_data = fetch_web_data(f"weather in {location}")
-        return f"🌦️ Here's the weather in {location.title()}:\n\n{web_data}"
+        weather_response = f"🌦️ Here's the weather in {location.title()}:\n\n{web_data}"
+        conversation_history.append({"role": "user", "content": question})
+        conversation_history.append({"role": "assistant", "content": weather_response})
+        log_to_csv(question, weather_response)
+        return weather_response
 
     conversation_history.append({"role": "user", "content": question})
 
@@ -200,6 +213,7 @@ def answer_question(question: str) -> str:
     })
 
     conversation_history.append({"role": "assistant", "content": answer})
+    log_to_csv(question, answer)
     return answer
 
 # CLI for testing
