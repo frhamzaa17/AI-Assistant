@@ -1,4 +1,4 @@
-# 🧠 AI Study Assistant
+# 🧠 AceBot AI Study Assistant
 
 A privacy-focused AI chatbot that answers academic questions, generates code, and handles natural conversations—powered by **Ollama**, **LangChain**, **ChromaDB**, and **Streamlit**.
 
