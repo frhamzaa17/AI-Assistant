@@ -78,7 +78,7 @@ def is_casual_question(question: str) -> bool:
 
 # APIs
 def fetch_web_data(query):
-    API_KEY = "81338aaaaf9975be0987ad03e12ff0dbc4761706bd80bf08f3788e12cf1487a9"  # Replace with your SerpAPI key
+    API_KEY = "KEY"  # Replace with your SerpAPI key
     url = "https://serpapi.com/search"
     params = {
         "engine": "google",
