@@ -16,7 +16,7 @@ A privacy-focused AI chatbot that answers academic questions, generates code, an
 - 📊 Responsive UI for both **desktop and mobile** devices  
 - 🔄 Async processing for fast responses (~1.8s average)  
 - 💡 Intent detection for small talk, compliments, identity questions, etc.
-- 🖥️ **Self-Train** keeps updating the database for training purpose.
+- 🖥️ **Self-Train**, keeps updating the database for training purpose.
 
 ---
 
