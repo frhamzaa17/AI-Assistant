@@ -2,7 +2,7 @@ import streamlit as st
 from main import answer_question
 
 # Page setup
-st.set_page_config(page_title="AI Study Coach", layout="centered")
+st.set_page_config(page_title="AI Assist", layout="centered")
 st.markdown("""
     <style>
         .chat-container {
@@ -53,8 +53,8 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.markdown("<h2 style='text-align: center;'>🎓 AI Study Coach</h2>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: gray;'>A personalized academic assistant for learners and achievers.</p>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center;'>🎓 AceBot AI Assistant</h2>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: gray;'>AI-Powered ChatBot</p>", unsafe_allow_html=True)
 
 # Initialize session
 if "messages" not in st.session_state:
@@ -81,7 +81,7 @@ if submitted and user_input:
     st.session_state.messages.append({"role": "user", "content": user_input})
     
     # Generate AI answer
-    with st.spinner("Coach is composing a response..."):
+    with st.spinner("Composing response..."):
         answer = answer_question(user_input)
     st.session_state.messages.append({"role": "bot", "content": answer})
 
