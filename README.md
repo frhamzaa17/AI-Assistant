@@ -26,7 +26,6 @@ A privacy-focused AI chatbot that answers academic questions, generates code, an
 📦 ai assistant/
 ├── main.py                 # Core logic for LangChain, LLM, tools, vector search
 ├── streamlit_app.py        # UI built using Streamlit
-├── vector.py               # Vector database setup and CSV ingestion
 |── study_routine_chatbot_rich_dataset.csv   #academic Q&A entries
 └── README.md               # This file
 ```
@@ -41,7 +40,7 @@ A privacy-focused AI chatbot that answers academic questions, generates code, an
 | Prompt Chaining      | [LangChain](https://www.langchain.com/) |
 | Vector Search        | [ChromaDB](https://www.trychroma.com/) |
 | UI                   | [Streamlit](https://streamlit.io/) |
-| Web Search           | [SerpAPI](https://serpapi.com/) |
+| Web Search           | [Tavily API]
 | Encyclopedia Access  | Wikipedia via LangChain |
 
 ---
