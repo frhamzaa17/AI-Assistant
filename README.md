@@ -7,14 +7,12 @@ A privacy-focused AI chatbot that answers academic questions, generates code, an
 ## 🚀 Features
 
 - ✅ **Offline-first AI Assistant** using Ollama for local LLM inference  
-- 🔍 **Semantic Search** over a 3000+ entry academic dataset via ChromaDB  
 - 🌐 **Wikipedia Integration** using LangChain tools for factual answers  
-- 📈 **Real-Time Web Data** using SerpAPI for current events and search  
-- 💬 **Context-Aware Conversations** using `conversation_history` tracking  
+- 📈 **Real-Time Web Data** using Tavily API for current events and search  
+- 💬 **Context-Aware Conversations** using `ConversationEntityMemory` tracking  
 - 💻 **Code Generation** from natural prompts  
 - 🖥️ **Streamlit Interface** for real-time chat and user interaction  
 - 📊 Responsive UI for both **desktop and mobile** devices  
-- 🔄 Async processing for fast responses (~1.8s average)  
 - 💡 Intent detection for small talk, compliments, identity questions, etc.
 - 🖥️ **Self-Train**, keeps updating the database for training purpose.
 
