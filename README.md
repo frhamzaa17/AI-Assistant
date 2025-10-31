@@ -92,7 +92,6 @@ streamlit run streamlit_app.py
 ## 📌 Upcoming Features
 
 - 🧠 Summarization and long document support for research use-cases  
-- 📝 Auto-update `study_routine_chatbot_rich_dataset.csv` with new Q&A entries from chats  
 - 📤 Export chat history to `.txt` or `.csv` for future reference or study notes  
 - 🔐 User sessions with persistent memory and personalized context  
 
